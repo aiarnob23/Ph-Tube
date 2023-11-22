@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PH Tube</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <!-- --------------navbar---------------- -->
+        <section class="container mx-auto text-center my-8 space-y-3">
+            <a class="btn btn-ghost normal-case text-xl"><img src="./img/Logo.png" alt=""></a>
+            <h4 class="text-[32px] font-bold text-[#252525]">Blog</h4>
+        </section>
+        <!-- ---------horizonal line----------- -->
+        <div class="container mx-auto mb-8">
+            <hr class="border-2">
+        </div>
+    </header>
+
+    <main class="container mx-auto">
+        <article class=" px-3 ">
+            <h2 class="text-4xl  font-semibold mb-4 ">1. The scope of var, let, and const</h2>
+            <p
+                class="text-2xl bg-orange-50 px-2 py-3 md:px-5  h-[600px] font-medium overflow-scroll overflow-x-hidden leading-10">
+                JavaScript has three variable declaration statements: var, let and const. The latter two were added in
+                ES6, whereas var existed since previous versions. One of the first things to notice is that const
+                defines constants (i.e. values that will not be reassigned), whereas var and let define variables. Yet,
+                var behaves differently from both let and const in various other ways.<br><br>
+                The <strong>var</strong> declaration has some confusing properties when it comes to scope. In
+                JavaScript, the var statement declares a function-scoped or globally-scoped variable, optionally
+                initializing it to a value. The scope of a variable declared with var is one of the following:
+                Variables declared with var are hoisted to the top of their scope, meaning that they can be used before
+                they are declared . However, it is considered best practice to declare variables at the beginning of
+                their scope to avoid confusion and bugs .<br>
+                <span class="font-bold">example code in JavaScript:</span><br>
+                <span class="text-gray-500">// Global variable declared with 'var'<br>
+                    var globalVar = "I'm a global variable";<br>
+                    function exampleFunction() {<br>
+                    // Local variable declared with 'var' within a function<br>
+                    var localVar = "I'm a local variable";<br>
+                    if (true) {<br>
+                    // 'var' variables are function-scoped, so 'if' block doesn't create a new scope<br>
+                    var blockVar = "I'm a 'var' variable inside an 'if' block";<br>
+                    }<br>
+                    // 'globalVar' and 'localVar' are accessible here<br>
+                    console.log(globalVar); // Outputs: I'm a global variable<br>
+                    console.log(localVar); // Outputs: I'm a local variable<br>
+                    console.log(blockVar); // Outputs: I'm a 'var' variable inside an 'if' block<br>
+                    }<br>
+                    exampleFunction();<br>
+                    // 'globalVar' is accessible outside the function scope<br>
+                    console.log(globalVar); // Outputs: I'm a global variable<br>
+                    // 'localVar' and 'blockVar' are not accessible here<br>
+                    console.log(localVar); // Throws an error: localVar is not defined<br>
+                    console.log(blockVar); // Throws an error: blockVar is not defined</span>
+                <br><br>
+                On the other hand, <strong>const</strong> has cleaner scoping rules and usually should be preferred.
+                Variables declared with const are block-scoped, which means they are only accessible within the block in
+                which they are defined (e.g., within a function or loop).
+                A const variable cannot be reassigned a new value once it is declared, but it doesn't necessarily make
+                the value itself immutable. For example, if you declare a const object, you can still modify its
+                properties.<br>
+                <span class="font-bold">example code in JavaScript:</span><br>
+                <span class="text-gray-500">// Global constant declared with 'const'<br>
+                    const globalConst = "I'm a global constant";<br>
+                    function exampleFunction() {<br>
+                    // Local constant declared with 'const' within a function<br>
+                    const localConst = "I'm a local constant";<br>
+                    if (true) {<br>
+                    // 'const' variables are block-scoped<br>
+                    const blockConst = "I'm a 'const' variable inside an 'if' block";<br>
+                    }<br>
+                    // 'globalConst' and 'localConst' are accessible here<br>
+                    console.log(globalConst); // Outputs: I'm a global constant<br>
+                    console.log(localConst); // Outputs: I'm a local constant<br>
+                    // 'blockConst' is not accessible here<br>
+                    console.log(blockConst); // Throws an error: blockConst is not defined<br>
+                    }<br>
+                    exampleFunction();<br>
+                    // 'globalConst' is accessible outside the function scope<br>
+                    console.log(globalConst); // Outputs: I'm a global constant<br>
+                    // 'localConst' and 'blockConst' are not accessible here<br>
+                    console.log(localConst); // Throws an error: localConst is not defined<br>
+                    console.log(blockConst); // Throws an error: blockConst is not defined</span>
+                <br><br>
+                Variables declared with <strong>let</strong> are also block-scoped like const. This means they are
+                accessible only within the block in
+                which they are declared, such as loops, conditional statements, or function blocks.
+                Variables declared with let can be reassigned new values within their scope.
+                Variables declared with let are not hoisted to the top of their scope, meaning that they cannot be used
+                before they are declared. This is known as the temporal dead zone. It is considered best practice to
+                declare variables at the beginning of their scope to avoid confusion and bugs .<br>
+                <span class="font-bold">example code in JavaScript:</span><br>
+                <span class="text-gray-500">function example() {<br>
+                    let x = 10;<br>
+                    if (true) {<br>
+                    let x = 20; // This 'x' is a different variable with block scope.<br>
+                    console.log(x); // Outputs 20<br>
+                    }<br>
+                    console.log(x); // Outputs 10<br>
+                    }</span>
+                <br><br>
+                In modern JavaScript, it's generally recommended to use let and const over var because they provide
+                better scoping control and reduce the potential for bugs. Use let when you need a variable that can be
+                reassigned, and use const when you want to create a constant that should not be reassigned.
+            </p>
+        </article>
+
+        <article class=" px-3  mt-20">
+            <h2 class="text-4xl  font-semibold mb-4 ">2. The use cases of null and undefined</h2>
+            <p
+                class="text-2xl bg-orange-50  h-[600px]  px-2 py-3 md:px-5  font-medium overflow-scroll overflow-x-hidden leading-10">
+                In JavaScript, null and undefined are two distinct values that are used to represent the absence of a
+                value . The difference between them is that undefined means a variable has been declared but has not yet
+                been assigned a value, while null is an assignment value that represents no value.<br><br>
+                Use <strong>null</strong> when you want to explicitly indicate that a variable has no value .null is
+                explicitly assigned to variables or properties to represent the intentional absence of any object value.
+                It is often used to indicate that a variable should hold no value or that an object property has no
+                assigned value.<br>For example, if you have a variable that stores a user’s middle name, but the user
+                doesn’t have one, you can set the variable to null.<br>Developers may use null to clear the value of an
+                object property, indicating that the property should not hold a reference to any object. <br>Developers
+                may use null to check if a particular value has been intentionally set as absent.<br><br>
+                Use <strong>undefined</strong> when you haven’t assigned a value to a variable yet . For example, if you
+                declare a variable but don’t assign it a value, it will be undefined.<br>
+                In JavaScript, when you declare a variable without assigning a value to it, it automatically receives
+                the value undefined. This is often used as the default value for variables that haven't been given a
+                meaningful value yet.<br>
+                If a function is called with fewer arguments than declared in its parameter list, the missing parameters
+                are assigned the value undefined.<br>
+                When you access an object property that doesn't exist, JavaScript returns undefined.
+                <br><br>
+                In summary, undefined typically represents the absence of an expected value due to a variable being
+                uninitialized, a function parameter missing an argument, or an object property not existing. On the
+                other hand, null is used to explicitly indicate the absence of any object value, and it can be assigned
+                to variables and object properties when you want to clear or signify the absence of a value.
+            </p>
+        </article>
+        <article class=" px-3  mt-20 mb-12">
+            <h2 class="text-4xl  font-semibold mb-4 ">3. REST API</h2>
+            <p
+                class="text-2xl bg-orange-50  h-[600px]  px-2 py-3 md:px-5  font-medium overflow-scroll overflow-x-hidden leading-10">
+                A REST API is an API that conforms to the design principles of the REST, or representational state
+                transfer architectural style. REST APIs provide a flexible, lightweight way to integrate applications
+                and to connect components in microservices architectures .<br>
+                At the most basic level, an API is a mechanism that enables an application or service to access a
+                resource within another application or service. The application or service doing the accessing is called
+                the client, and the application or service containing the resource is called the server<br><br>
+                A REST API, which stands for Representational State Transfer Application Programming Interface, is a
+                standardized approach to building web services that allow different software applications to communicate
+                over the internet or a network. REST APIs are designed based on a set of architectural principles,
+                making them simple, scalable, and easy to understand. In a REST API, resources, such as data objects or
+                services, are represented as unique URLs, and clients interact with these resources using standard HTTP
+                methods like GET, POST, PUT, and DELETE. RESTful APIs follow a stateless communication model, meaning
+                that each request from a client to a server contains all the information needed, and the server does not
+                retain any client state between requests. This design promotes modularity, uniformity, and separation of
+                concerns, making REST APIs a popular choice for building web and mobile applications, connecting to
+                external services, and facilitating interoperability between different software systems.
+            </p>
+        </article>
+
+    </main>
+
+    <footer class="container mx-auto text-center mb-6">
+        <a href="index.html" target="_blank"
+            class="btn text-3xl py-1 px-2 bg-[#FF1F3D] text-white normal-case font-medium">Go to PH Tube</a>
+    </footer>
+</body>
+</html>
